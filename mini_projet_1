@@ -7,14 +7,14 @@ def main_buying(vehicle: str,
                 age: int,
                 class_nb: int = 0,
                 is_one_way: bool = True) -> float:
-    """ Main function managing the input and redirecting to the sub-function
+    """Main function managing the input and redirecting to the sub-function
     Parameters
     ----------
     vehicle : str
         Type of transport, either "bus", "train", or "subway"
 
     age : int
-        age of the passenger
+        Age of the passenger
 
     class_nb: int
         In the case of train transportation, you have to specify the class, either 1 or 2
@@ -27,7 +27,7 @@ def main_buying(vehicle: str,
     Returns
     -------
     float
-        The money you'll have to pay
+        The money you'll have to pay in [€]
     """
     pass
 
@@ -35,6 +35,48 @@ def main_buying(vehicle: str,
 def train(age: int,
           class_nb: int,
           is_one_way: bool) -> float:
-    """ Train function managing train tickets"""
+    """Sub-function managing train tickets
+    Parameters
+    ----------
+    age: int
+        Age of the passenger
+    class_nb: int
+        Class of the ticket
+    is_one_way: bool
+        Whether the ticket is a one way ticket or include the return trip
+    Returns
+    -------
+    float
+        The price of the ticket in [€]
+    """
     pass
+
+
+def bus(age: int) -> float:
+    """Sub-function managing bus tickets
+    Parameters
+    ----------
+    age: int
+        Age of the passenger
+    Returns
+    -------
+    float
+        The price of a ticket in [€]
+    """
+    pass
+
+
+def subway(age: int) -> float:
+    """Sub-function managing subway tickets
+    Parameters
+    ----------
+    age: int
+        Age of the passenger
+    Returns
+    -------
+    float
+        The price of a ticket in [€]
+    """
+    pass
+
 
