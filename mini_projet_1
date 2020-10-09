@@ -29,10 +29,29 @@ def main_buying(vehicle: str,
     float
         The money you'll have to pay in [€]
     """
+    # call age_classification
+    # check the vehicle and redirect to sub-function
+    # return the result
+
     pass
 
 
-def train(age: int,
+def age_classification(age: int):
+	"""Classify age
+	Parameters
+	----------
+	age: int
+		Age of the passenger
+
+	Returns
+	-------
+	str
+		Age class (e.g. senior, youth, kid)
+	"""
+	pass
+
+
+def train(age_class: str,
           class_nb: int,
           is_one_way: bool) -> float:
     """Sub-function managing train tickets
@@ -44,6 +63,7 @@ def train(age: int,
         Class of the ticket
     is_one_way: bool
         Whether the ticket is a one way ticket or include the return trip
+
     Returns
     -------
     float
@@ -52,12 +72,16 @@ def train(age: int,
     pass
 
 
-def bus(age: int) -> float:
+def bus(age_class: str,
+        is_one_way: bool) -> float:
     """Sub-function managing bus tickets
     Parameters
     ----------
     age: int
         Age of the passenger
+    is_one_way: bool
+        Whether the ticket is a one way ticket or include the return trip
+
     Returns
     -------
     float
@@ -66,12 +90,13 @@ def bus(age: int) -> float:
     pass
 
 
-def subway(age: int) -> float:
+def subway(age_class: str) -> float:
     """Sub-function managing subway tickets
     Parameters
     ----------
     age: int
         Age of the passenger
+
     Returns
     -------
     float
