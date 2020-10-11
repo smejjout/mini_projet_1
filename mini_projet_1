@@ -10,97 +10,71 @@ def main_buying(vehicle: str,
     """Main function managing the input and redirecting to the sub-function
     Parameters
     ----------
-    vehicle : str
-        Type of transport, either "bus", "train", or "subway"
+    vehicle: Type of transport, either "bus", "train", or "subway" (str)
 
-    age : int
-        Age of the passenger
+    age: Age of the passenger (int)
 
-    class_nb: int
-        In the case of train transportation, you have to specify the class, either 1 or 2
-        Defaults to 0 which means it's irrelevant (e.g. in a bus)
+    class_nb: In the case of train transportation, you have to specify the class, either 1 or 2
+        Defaults to 0 which means it's irrelevant (e.g. in a bus) (int)
 
-    is_one_way: bool
-        Whether the ticket is a one way ticket or include the return trip
-        Defaults to True
+    is_one_way: Whether the ticket is a one way ticket or include the return trip
+        Defaults to True (bool)
 
     Returns
     -------
-    float
-        The money you'll have to pay in [€]
+    The money you'll have to pay in [€] (float)
     """
-    # call age_classification
     # check the vehicle and redirect to sub-function
     # return the result
 
     pass
 
 
-def age_classification(age: int):
-	"""Classify age
-	Parameters
-	----------
-	age: int
-		Age of the passenger
-
-	Returns
-	-------
-	str
-		Age class (e.g. senior, youth, kid)
-	"""
-	pass
-
-
-def train(age_class: str,
+def train(age: str,
           class_nb: int,
           is_one_way: bool) -> float:
     """Sub-function managing train tickets
     Parameters
     ----------
-    age: int
-        Age of the passenger
-    class_nb: int
-        Class of the ticket
-    is_one_way: bool
-        Whether the ticket is a one way ticket or include the return trip
+    age: Age of the passenger (int)
+
+    class_nb: In the case of train transportation, you have to specify the class, either 1 or 2
+        Defaults to 0 which means it's irrelevant (e.g. in a bus) (int)
+
+    is_one_way: Whether the ticket is a one way ticket or include the return trip (bool)
 
     Returns
     -------
-    float
-        The price of the ticket in [€]
+    The price of a ticket in [€] (float)
     """
     pass
 
 
-def bus(age_class: str,
+def bus(age: str,
         is_one_way: bool) -> float:
     """Sub-function managing bus tickets
     Parameters
     ----------
-    age: int
-        Age of the passenger
-    is_one_way: bool
-        Whether the ticket is a one way ticket or include the return trip
+    age: Age of the passenger (int)
+
+    is_one_way: Whether the ticket is a one way ticket or include the return trip (bool)
 
     Returns
     -------
-    float
-        The price of a ticket in [€]
+    The price of a ticket in [€] (float)
     """
     pass
 
 
-def subway(age_class: str) -> float:
+def subway(age: int) -> float:
     """Sub-function managing subway tickets
     Parameters
     ----------
-    age: int
-        Age of the passenger
+    age: Age of the passenger (int)
 
     Returns
     -------
-    float
-        The price of a ticket in [€]
+    The price of a ticket in [€] (float)
     """
     pass
 
