@@ -25,9 +25,9 @@ def redirection(vehicle,
     """
     price = 0
     if vehicle == "train":
-        price = train(age, class_nb)
+        price = train(age, class_nb, nb_trip)
     elif vehicle == "bus":
-        price = bus(age, nb_trip)
+        price = bus(age)
     elif vehicle == "subway":
         price = subway(age, nb_trip)
     return price
@@ -35,8 +35,8 @@ def redirection(vehicle,
 
 def main_buying(vehicle,
                 age,
-                class_nb = 0,
-                nb_trip = 1):
+                class_nb=0,
+                nb_trip=1):
     """Main function managing the input and formatting the result
     Parameters
     ----------
@@ -78,7 +78,7 @@ def train(age,
     -------
     The price of a ticket in [€] (float)
     """
-    price = 0
+
     if class_nb > 2 or class_nb < 0:
         raise Exception("The class number you entered doesn't exist.")
     elif class_nb == 0:
@@ -117,27 +117,47 @@ def train(age,
         if class_nb == 1:
             price = 128
         elif age <= 26:
-                price = 53
+            price = 53
         else:
-                price = 83
+            price = 83
     else:
         price = ((nb_trip - nb_trip % 2) / 2) * train(age, class_nb, 2) + train(age, class_nb, 1)
 
     return price
 
 
-def bus(age, nb_trip):
+def bus(nb_trip):
     """Sub-function managing bus tickets
     Parameters
     ----------
-    age: Age of the passenger (int)
-
     nb_trip: The number of trips you want to buy (int)
 
     Returns
     -------
     The price of a ticket in [€] (float)
     """
+    price = 0
+    if nb_trip == 1:
+        price = 2.5
+    elif nb_trip == 8:
+        price = 9.1
+    elif nb_trip == 12:
+        price = 13.5
+    elif nb_trip % 8 == 0:
+        price = nb_trip * 9.1
+    elif nb_trip % 12 == 0:
+        price = nb_trip * 13.5
+    elif nb_trip // 8 == nb_trip // 12:
+        if nb_trip == (nb_trip - nb_trip % 8) + 1 or nb_trip == (nb_trip - nb_trip % 8) + 2 or nb_trip == (nb_trip - nb_trip % 8) + 3:
+            price = (nb_trip // 12) * 13.5 + (nb_trip % 12) * 2.5
+        else:
+            price = ((nb_trip // 8) + 1) * 9.1
+    elif nb_trip // 8 > nb_trip // 12:
+        price = ((nb_trip // 12) + 1) * 13.5
+    elif nb_trip // 12 > nb_trip // 8:
+        price = ((nb_trip // 8) + 1) * 9.1
+# TODO factorise
+    return price
 
 
 def subway(age, nb_trip):
