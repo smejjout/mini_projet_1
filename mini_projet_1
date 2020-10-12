@@ -23,6 +23,14 @@ def redirection(vehicle,
     -------
     The money you'll have to pay in [€] (float)
     """
+    price = 0
+    if vehicle == "train":
+        price = train(age, class_nb)
+    elif vehicle == "bus":
+        price = bus(age, nb_trip)
+    elif vehicle == "subway":
+        price = subway(age, nb_trip)
+    return price
 
 
 def main_buying(vehicle,
