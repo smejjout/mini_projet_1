@@ -52,6 +52,13 @@ def main_buying(vehicle,
     """
     # pass the parameters to the sub-function
     # return the result
+    price = redirection(vehicle, age, class_nb, nb_trip)
+    print("You bought %d %s ticket for %.2f €" % (nb_trip, vehicle, price))
+    if class_nb == 1:
+        print("You are in the 1st class!")
+    elif class_nb == 2:
+        print("You are in the 2nd class.")    
+    pass
 
 
 def train(age,
