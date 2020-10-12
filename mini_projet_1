@@ -3,11 +3,33 @@
 # Management of public transit tickets
 # Modeling a ticket buying system
 
-def main_buying(vehicle: str,
-                age: int,
-                class_nb: int = 0,
-                is_one_way: bool = True) -> float:
-    """Main function managing the input and redirecting to the sub-function
+def redirection(vehicle,
+                age,
+                class_nb,
+                nb_trip):
+    """Main function managing the input and formatting the result
+    Parameters
+    ----------
+    vehicle: Type of transport, either "bus", "train", or "subway" (str)
+
+    age: Age of the passenger (int)
+
+    class_nb: In the case of train transportation, you have to specify the class, either 1 or 2
+        Defaults to 0 which means it's irrelevant (e.g. in a bus) (int)
+    nb_trip: The number of trips you want to buy 
+        Defaults to 1 (int)
+
+    Returns
+    -------
+    The money you'll have to pay in [€] (float)
+    """
+
+
+def main_buying(vehicle,
+                age,
+                class_nb = 0,
+                nb_trip = 1):
+    """Main function managing the input and formatting the result
     Parameters
     ----------
     vehicle: Type of transport, either "bus", "train", or "subway" (str)
@@ -17,22 +39,16 @@ def main_buying(vehicle: str,
     class_nb: In the case of train transportation, you have to specify the class, either 1 or 2
         Defaults to 0 which means it's irrelevant (e.g. in a bus) (int)
 
-    is_one_way: Whether the ticket is a one way ticket or include the return trip
-        Defaults to True (bool)
-
-    Returns
-    -------
-    The money you'll have to pay in [€] (float)
+    nb_trip: The number of trips you want to buy 
+        Defaults to 1 (int)
     """
-    # check the vehicle and redirect to sub-function
+    # pass the parameters to the sub-function
     # return the result
 
-    pass
 
-
-def train(age: str,
-          class_nb: int,
-          is_one_way: bool) -> float:
+def train(age,
+          class_nb,
+          nb_trip):
     """Sub-function managing train tickets
     Parameters
     ----------
@@ -41,41 +57,38 @@ def train(age: str,
     class_nb: In the case of train transportation, you have to specify the class, either 1 or 2
         Defaults to 0 which means it's irrelevant (e.g. in a bus) (int)
 
-    is_one_way: Whether the ticket is a one way ticket or include the return trip (bool)
+    nb_trip: The number of trips you want to buy (int) 
 
     Returns
     -------
     The price of a ticket in [€] (float)
     """
-    pass
 
 
-def bus(age: str,
-        is_one_way: bool) -> float:
+def bus(age, nb_trip):
     """Sub-function managing bus tickets
     Parameters
     ----------
     age: Age of the passenger (int)
 
-    is_one_way: Whether the ticket is a one way ticket or include the return trip (bool)
+    nb_trip: The number of trips you want to buy (int)
 
     Returns
     -------
     The price of a ticket in [€] (float)
     """
-    pass
 
 
-def subway(age: int) -> float:
+def subway(age, nb_trip):
     """Sub-function managing subway tickets
     Parameters
     ----------
     age: Age of the passenger (int)
 
+    nb_trip: The number of trips you want to buy (int)
+
     Returns
     -------
     The price of a ticket in [€] (float)
     """
     pass
-
-
