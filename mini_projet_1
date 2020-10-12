@@ -78,6 +78,52 @@ def train(age,
     -------
     The price of a ticket in [€] (float)
     """
+    price = 0
+    if class_nb > 2 or class_nb < 0:
+        raise Exception("The class number you entered doesn't exist.")
+    elif class_nb == 0:
+        raise Exception("You did not enter a class number")
+    elif nb_trip == 1:
+        if class_nb == 1:
+            if age <= 12:
+                price = 4.6
+            else:
+                price = 7.6
+        else:
+            if age <= 12:
+                price = 3.5
+            elif age <= 26:
+                price = 6.6
+            else:
+                price = 5.9
+    elif nb_trip == 2:
+        if class_nb == 1:
+            if age <= 12:
+                price = 9.2
+            elif age >= 65:
+                price = 15.3
+            else:
+                price = 15.2
+        else:
+            if age <= 12:
+                price = 7
+            elif age <= 26:
+                price = 13.2
+            elif age >= 65:
+                price = 7.2
+            else:
+                price = 11.8
+    elif nb_trip == 10:
+        if class_nb == 1:
+            price = 128
+        elif age <= 26:
+                price = 53
+        else:
+                price = 83
+    else:
+        price = ((nb_trip - nb_trip % 2) / 2) * train(age, class_nb, 2) + train(age, class_nb, 1)
+
+    return price
 
 
 def bus(age, nb_trip):
