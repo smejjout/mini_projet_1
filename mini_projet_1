@@ -149,25 +149,20 @@ def bus(nb_trip):
     The price of a ticket in [€] (float)
     """
     price = 0
-    if nb_trip % 8 == 0:
-        price = nb_trip * 9.1
-    elif nb_trip % 12 == 0:
-        price = nb_trip * 13.5
-    elif (nb_trip - nb_trip % 8) == (nb_trip - nb_trip % 12):
-        if nb_trip > (nb_trip - nb_trip % 8) and nb_trip <= (nb_trip - nb_trip % 8) + 3:
+    if nb_trip % 8 == nb_trip % 12:
+        if nb_trip % 8 >= 0 and nb_trip % 8 <= 3:
             price = (nb_trip // 8) * 9.1 + (nb_trip % 8) * 2.5
         else:
             price = ((nb_trip // 8) + 1) * 9.1
-    elif (nb_trip - nb_trip % 8) > (nb_trip - nb_trip % 12):
-        if nb_trip == (nb_trip - nb_trip % 8) + 1:
-            price = (nb_trip // 8) * 9.1 + 2.5
+    elif nb_trip % 8 < nb_trip % 12:
+        if nb_trip % 8 == 1 or nb_trip % 8 == 0:
+            price = (nb_trip // 8) * 9.1 + (nb_trip % 8) * 2.5
         else:
             price = ((nb_trip // 12) + 1) * 13.5
+    elif nb_trip % 12 == 1 or nb_trip % 12 == 0:
+        price = (nb_trip // 12) * 13.5 + (nb_trip % 12) * 2.5
     else:
-        if nb_trip == (nb_trip - nb_trip % 12) + 1:
-            price = (nb_trip // 12) * 13.5 + 2.5
-        else:
-            price = ((nb_trip // 8) + 1) * 9.1
+        price = ((nb_trip // 8) + 1) * 9.1
     return price
 
 
@@ -181,4 +176,16 @@ def subway(nb_trip):
     -------
     The price of a ticket in [€] (float)
     """
-    pass
+    price = 0
+    if nb_trip - nb_trip % 5 == nb_trip - nb_trip % 10: # [X0;X5[
+        if nb_trip % 5 >= 0 and nb_trip % 5 <= 3:
+            price = (nb_trip // 10) * 14 + (nb_trip % 10) * 2.1
+        else:
+            price = (nb_trip // 10) * 10 + 8
+    elif nb_trip % 5 < nb_trip % 10: # [X5;X0[ left the if for readability
+        if nb_trip % 5 >= 0 and nb_trip % 5 <= 2:
+            price = (nb_trip // 10) * 14 + 8 + (nb_trip % 5) * 2.1
+        else:
+            price = ((nb_trip // 10) + 1) * 14
+
+    return price
