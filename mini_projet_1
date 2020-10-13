@@ -24,17 +24,21 @@ def redirection(vehicle,
     The money you'll have to pay in [€] (float)
     """
     price = 0
-    if vehicle == "train":
+    if nb_trip < 1:
+        print("Number of trip entered not strictly positive")
+    elif vehicle == "train":
         price = train(age, class_nb, nb_trip)
     elif vehicle == "bus":
         price = bus(nb_trip)
     elif vehicle == "subway":
         price = subway(nb_trip)
+    else:
+        print("Enter either train, bus, or subway")
     return price
 
 
 def main_buying(vehicle,
-                age,
+                age=0,
                 class_nb=0,
                 nb_trip=1):
     """Main function managing the input and formatting the result
@@ -42,13 +46,14 @@ def main_buying(vehicle,
     ----------
     vehicle: Type of transport, either "bus", "train", or "subway" (str)
 
-    age: Age of the passenger (int)
+    age: Age of the passenger (int, optional)
+        Defaults to 0 meaning it's irrelevant to the prices
 
     class_nb: In the case of train transportation, you have to specify the class, either 1 or 2
-        Defaults to 0 which means it's irrelevant (e.g. in a bus) (int)
+        Defaults to 0 which means it's irrelevant (e.g. in a bus) (int, optional)
 
     nb_trip: The number of trips you want to buy 
-        Defaults to 1 (int)
+        Defaults to 1 (int, optional)
     """
     # pass the parameters to the sub-function
     # return the result
@@ -80,9 +85,13 @@ def train(age,
     """
 
     if class_nb > 2 or class_nb < 0:
-        raise Exception("The class number you entered doesn't exist.")
+        print("The class number you entered doesn't exist.")
     elif class_nb == 0:
-        raise Exception("You did not enter a class number")
+        print("You did not enter a class number")
+    elif age < 0:
+        print("Please enter a positive number for the age")
+    elif age == 0:
+        print("You did not enter the age")
     elif nb_trip == 1:
         if class_nb == 1:
             if age <= 12:
@@ -121,7 +130,10 @@ def train(age,
         else:
             price = 83
     else:
-        price = ((nb_trip - nb_trip % 2) / 2) * train(age, class_nb, 2) + train(age, class_nb, 1)
+        nb_trip_10 = nb_trip // 10
+        nb_trip_2 = (nb_trip - nb_trip_10 * 10) // 2
+        nb_trip_rest = nb_trip -  nb_trip_10 * 10 - nb_trip_2 * 2
+        price = nb_trip_10 * train(age,class_nb, 10) + nb_trip_2 * train(age, class_nb, 2) + nb_trip_rest * train(age, class_nb, 1)
 
     return price
 
@@ -137,16 +149,12 @@ def bus(nb_trip):
     The price of a ticket in [€] (float)
     """
     price = 0
-    if nb_trip < 1:
-        raise Exception("Number entered not strictly positive")
-    elif nb_trip % 8 == 0:
+    if nb_trip % 8 == 0:
         price = nb_trip * 9.1
     elif nb_trip % 12 == 0:
         price = nb_trip * 13.5
     elif (nb_trip - nb_trip % 8) == (nb_trip - nb_trip % 12):
-        if nb_trip == (nb_trip - nb_trip % 8) + 1 or 
-           nb_trip == (nb_trip - nb_trip % 8) + 2 or 
-           nb_trip == (nb_trip - nb_trip % 8) + 3:
+        if nb_trip > (nb_trip - nb_trip % 8) and nb_trip <= (nb_trip - nb_trip % 8) + 3:
             price = (nb_trip // 8) * 9.1 + (nb_trip % 8) * 2.5
         else:
             price = ((nb_trip // 8) + 1) * 9.1
@@ -155,7 +163,7 @@ def bus(nb_trip):
             price = (nb_trip // 8) * 9.1 + 2.5
         else:
             price = ((nb_trip // 12) + 1) * 13.5
-    elif (nb_trip - nb_trip % 12) > (nb_trip - nb_trip % 8):
+    else:
         if nb_trip == (nb_trip - nb_trip % 12) + 1:
             price = (nb_trip // 12) * 13.5 + 2.5
         else:
@@ -163,17 +171,14 @@ def bus(nb_trip):
     return price
 
 
-def subway(age, nb_trip):
+def subway(nb_trip):
     """Sub-function managing subway tickets
     Parameters
     ----------
-    age: Age of the passenger (int)
-
     nb_trip: The number of trips you want to buy (int)
 
     Returns
     -------
     The price of a ticket in [€] (float)
     """
-
     pass
