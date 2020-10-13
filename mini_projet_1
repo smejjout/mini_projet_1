@@ -27,9 +27,9 @@ def redirection(vehicle,
     if vehicle == "train":
         price = train(age, class_nb, nb_trip)
     elif vehicle == "bus":
-        price = bus(age)
+        price = bus(nb_trip)
     elif vehicle == "subway":
-        price = subway(age, nb_trip)
+        price = subway(nb_trip)
     return price
 
 
@@ -57,7 +57,7 @@ def main_buying(vehicle,
     if class_nb == 1:
         print("You are in the 1st class!")
     elif class_nb == 2:
-        print("You are in the 2nd class.")    
+        print("You are in the 2nd class.")
     pass
 
 
@@ -137,26 +137,29 @@ def bus(nb_trip):
     The price of a ticket in [€] (float)
     """
     price = 0
-    if nb_trip == 1:
-        price = 2.5
-    elif nb_trip == 8:
-        price = 9.1
-    elif nb_trip == 12:
-        price = 13.5
+    if nb_trip < 1:
+        raise Exception("Number entered not strictly positive")
     elif nb_trip % 8 == 0:
         price = nb_trip * 9.1
     elif nb_trip % 12 == 0:
         price = nb_trip * 13.5
-    elif nb_trip // 8 == nb_trip // 12:
-        if nb_trip == (nb_trip - nb_trip % 8) + 1 or nb_trip == (nb_trip - nb_trip % 8) + 2 or nb_trip == (nb_trip - nb_trip % 8) + 3:
-            price = (nb_trip // 12) * 13.5 + (nb_trip % 12) * 2.5
+    elif (nb_trip - nb_trip % 8) == (nb_trip - nb_trip % 12):
+        if nb_trip == (nb_trip - nb_trip % 8) + 1 or 
+           nb_trip == (nb_trip - nb_trip % 8) + 2 or 
+           nb_trip == (nb_trip - nb_trip % 8) + 3:
+            price = (nb_trip // 8) * 9.1 + (nb_trip % 8) * 2.5
         else:
             price = ((nb_trip // 8) + 1) * 9.1
-    elif nb_trip // 8 > nb_trip // 12:
-        price = ((nb_trip // 12) + 1) * 13.5
-    elif nb_trip // 12 > nb_trip // 8:
-        price = ((nb_trip // 8) + 1) * 9.1
-# TODO factorise
+    elif (nb_trip - nb_trip % 8) > (nb_trip - nb_trip % 12):
+        if nb_trip == (nb_trip - nb_trip % 8) + 1:
+            price = (nb_trip // 8) * 9.1 + 2.5
+        else:
+            price = ((nb_trip // 12) + 1) * 13.5
+    elif (nb_trip - nb_trip % 12) > (nb_trip - nb_trip % 8):
+        if nb_trip == (nb_trip - nb_trip % 12) + 1:
+            price = (nb_trip // 12) * 13.5 + 2.5
+        else:
+            price = ((nb_trip // 8) + 1) * 9.1
     return price
 
 
@@ -172,4 +175,5 @@ def subway(age, nb_trip):
     -------
     The price of a ticket in [€] (float)
     """
+
     pass
