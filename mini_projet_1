@@ -24,9 +24,7 @@ def redirection(vehicle,
     The money you'll have to pay in [€] (float)
     """
     price = 0
-    if nb_trip < 1:
-        print("Number of trip entered not strictly positive")
-    elif vehicle == "train":
+    if vehicle == "train":
         price = train(age, class_nb, nb_trip)
     elif vehicle == "bus":
         price = bus(nb_trip)
@@ -57,6 +55,8 @@ def main_buying(vehicle,
     """
     # pass the parameters to the sub-function
     # return the result
+    if nb_trip < 1:
+        print("Number of trip entered not strictly positive")
     price = redirection(vehicle, age, class_nb, nb_trip)
     print("You bought %d %s ticket for %.2f €" % (nb_trip, vehicle, price))
     if class_nb == 1:
