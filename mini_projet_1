@@ -82,8 +82,12 @@ def train(age,
     Returns
     -------
     The price of a ticket in [€] (float)
-    """
 
+    Notes
+    -----
+    Every price is taken from https://belgiantrain.be
+    """
+    price = 0
     if class_nb > 2 or class_nb < 0:
         print("The class number you entered doesn't exist.")
     elif class_nb == 0:
@@ -132,8 +136,10 @@ def train(age,
     else:
         nb_trip_10 = nb_trip // 10
         nb_trip_2 = (nb_trip - nb_trip_10 * 10) // 2
-        nb_trip_rest = nb_trip -  nb_trip_10 * 10 - nb_trip_2 * 2
-        price = nb_trip_10 * train(age,class_nb, 10) + nb_trip_2 * train(age, class_nb, 2) + nb_trip_rest * train(age, class_nb, 1)
+        nb_trip_rest = nb_trip - nb_trip_10 * 10 - nb_trip_2 * 2
+        price = nb_trip_10 * train(age, class_nb, 10) + \
+            nb_trip_2 * train(age, class_nb, 2) + \
+            nb_trip_rest * train(age, class_nb, 1)
 
     return price
 
@@ -147,8 +153,11 @@ def bus(nb_trip):
     Returns
     -------
     The price of a ticket in [€] (float)
+
+    Notes
+    -----
+    Every price is taken from https://letec.be
     """
-    price = 0
     if nb_trip % 8 == nb_trip % 12:
         if nb_trip % 8 >= 0 and nb_trip % 8 <= 3:
             price = (nb_trip // 8) * 9.1 + (nb_trip % 8) * 2.5
@@ -175,14 +184,18 @@ def subway(nb_trip):
     Returns
     -------
     The price of a ticket in [€] (float)
+
+    Notes
+    -----
+    Every price is taken from https://www.stib-mivb.be
     """
     price = 0
-    if nb_trip - nb_trip % 5 == nb_trip - nb_trip % 10: # [X0;X5[
+    if nb_trip - nb_trip % 5 == nb_trip - nb_trip % 10:  # [X0;X5[
         if nb_trip % 5 >= 0 and nb_trip % 5 <= 3:
             price = (nb_trip // 10) * 14 + (nb_trip % 10) * 2.1
         else:
             price = (nb_trip // 10) * 10 + 8
-    elif nb_trip % 5 < nb_trip % 10: # [X5;X0[ left the if for readability
+    elif nb_trip % 5 < nb_trip % 10:  # [X5;X0[ left the if for readability
         if nb_trip % 5 >= 0 and nb_trip % 5 <= 2:
             price = (nb_trip // 10) * 14 + 8 + (nb_trip % 5) * 2.1
         else:
